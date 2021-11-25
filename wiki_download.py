@@ -37,9 +37,7 @@ def run(lang):
     file_path = tf.keras.utils.get_file(
         origin=origin, fname=fname, untar=False, extract=False
     )
-    corpus = WikiCorpus(
-        file_path, lemmatize=False, lower=False, tokenizer_func=tokenizer_func
-    )
+    corpus = WikiCorpus(file_path, lower=False, tokenizer_func=tokenizer_func)
     store(corpus, lang)
 
 
