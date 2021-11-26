@@ -1,5 +1,5 @@
 from datasets import load_dataset
-import datasets
+from tqdm import tqdm
 
 """
 Download 1.5 billion words dataset from different news websites datasource using huggingface library
@@ -31,9 +31,11 @@ src_lst = [
     "Youm7",
 ]
 
+single_string = ""
 for src in src_lst:
-    load_dataset("arabic_billion_words", src)
-
-# dataset_Alittihad = load_dataset("arabic_billion_words", "Alittihad")
-
-# print(dataset_Alittihad["train"]["text"][0])
+    dataset = load_dataset("arabic_billion_words", src)
+    for row in tqdm(dataset["train"]["text"]):
+        single_string = row.strip()
+        with open("data.txt", "a") as file_handle:
+            file_handle.write(single_string)
+            file_handle.write("\n")
